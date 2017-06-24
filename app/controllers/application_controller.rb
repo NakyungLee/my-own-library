@@ -9,6 +9,11 @@ class ApplicationController < Sinatra::Base
 
 
   get '/' do
+    if logged_in?
+      @username = 'user'
+    else
+      @username = 'Stranger'
+    end
     erb :index
   end
 
