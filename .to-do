@@ -16,3 +16,10 @@ DB
 
 - Logged in user can watch her all comments and sentences ( ) (Comment.all, Sentence.all)
 - Comment and Sentence belong to Books.
+
+
+Class
+- User
+- Book
+- Comment
+- Sentence
