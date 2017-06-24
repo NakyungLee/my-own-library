@@ -1,0 +1,18 @@
+When we read a book, we often find the sentences we want to remember.
+Or sometimes, we want to add some comments.
+
+- Users can signup/login/logout ( )
+- Users can add books ( )
+- Users can add/edit/delete comments to a book page ( )
+- Users can add/edit/delete sentences to a book page ( )
+
+
+DB
+- Users have username, email, password ( )
+- Users can have many books ( )
+
+- Books can have many comments and sentences ( )
+- Books have user_id ( )
+
+- Logged in user can watch her all comments and sentences ( ) (Comment.all, Sentence.all)
+- Comment and Sentence belong to Books.
