@@ -1,0 +1,9 @@
+<h1>Edit</h1>
+name:<%=@book.name%>
+author:<%=@book.author%>
+<% @book.comments.each do |c| %>
+  comment:<%= c.comment%>
+<% end %>
+<% @book.sentences.each do |s| %>
+  sentence:<%= s.sentence%>
+<% end %>

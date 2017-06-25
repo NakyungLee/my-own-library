@@ -1,2 +1,18 @@
 <!-- can go to show comments and sentences -->
 <h2>Hello, <strong><%=@user.username%></strong>. This is your book page!</h2>
+<button type="button" class="btn btn-primary" onclick="location.href='/books/new'">Add Book</button>
+
+
+
+<div class="row" >
+  <% @books.each do |book| %>
+    <% if book.user_id == session[:user_id] %>
+      <div class="col-md-4" style="margin:10px; padding:10px; padding-top:20px; background-color: 	#D3D3D3">
+        <p>Title: <%= book.name %></p>
+        <p>Author: <%= book.author %></p>
+        <button type="button" class="btn btn-info" onclick="location.href='/books/edit/<%=book.id%>'">More Info</button>
+
+      </div>
+    <% end %>
+  <% end %>
+</div>
