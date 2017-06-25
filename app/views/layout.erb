@@ -26,7 +26,15 @@
 			      <span class="icon-bar"></span>
 			      <span class="icon-bar"></span>
 			    </button>
-			    <a class="navbar-brand" href="/">My Own Library</a>
+			    <a class="navbar-brand" href="/">
+						<% if logged_in? %>
+						  My Own Library: <%=User.find(session[:user_id]).username%>
+						<% else %>
+							  My Own Library: Not Logged in
+						<% end %>
+
+
+					</a>
 			  </div>
 			  <div class="navbar-collapse collapse">
 			    <ul class="nav navbar-nav">

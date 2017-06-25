@@ -1,4 +1,6 @@
+require 'rack-flash'
 class UsersController < ApplicationController
+  use Rack::Flash
   get '/signup' do
     if logged_in?
       redirect to '/books'
@@ -8,15 +10,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    # binding.pry
     if params[:username].empty? || params[:password].empty? || params[:email].empty?
-      # flash[:message] = "Fill in every field."
+      flash[:message] = "Fill in every field."
       redirect to '/signup'
     else
       @user = User.new(username:params[:username],email:params[:email],password:params[:password])
       @user.save
       session[:user_id] = @user.id
-      binding.pry
       redirect to '/books'
     end
   end

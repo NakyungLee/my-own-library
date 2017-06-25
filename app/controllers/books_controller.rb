@@ -1,7 +1,15 @@
+require 'rack-flash'
 class BooksController < ApplicationController
+  use Rack::Flash
+
   get '/books' do
-    @user=User.find_by(session[:user_id])
-    erb :'/books/books'
+    if logged_in?
+      @user=User.find(session[:user_id])
+      erb :'/books/books'
+    else
+      flash[:message]="Please Login to access books page."
+      redirect to '/login'
+    end
   end
 
   get '/books/new' do
@@ -13,6 +21,5 @@ class BooksController < ApplicationController
   end
 
   post '/books/new' do
-    binding.pry
   end
 end
