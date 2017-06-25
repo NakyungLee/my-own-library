@@ -28,9 +28,16 @@ class BooksController < ApplicationController
     redirect to '/books'
   end
 
-  get '/books/edit/:book_id' do
+  get '/books/:book_id/edit' do
     @book = Book.find(params[:book_id])
-    binding.pry
     erb :"/books/edit_books"
+  end
+
+  patch '/books/:book_id/edit' do
+    book = Book.find(params[:book_id])
+    book.update(name:params[:name]) unless params[:name].empty?
+    book.update(author:params[:author]) unless params[:author].empty?
+    binding.pry
+    redirect to '/books'
   end
 end

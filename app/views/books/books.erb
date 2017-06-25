@@ -10,7 +10,7 @@
       <div class="col-md-4" style="margin:10px; padding:10px; padding-top:20px; background-color: 	#D3D3D3">
         <p>Title: <%= book.name %></p>
         <p>Author: <%= book.author %></p>
-        <button type="button" class="btn btn-info" onclick="location.href='/books/edit/<%=book.id%>'">More Info</button>
+        <button type="button" class="btn btn-info" onclick="location.href='/books/<%=book.id%>/edit'">More Info</button>
 
       </div>
     <% end %>

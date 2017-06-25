@@ -23,3 +23,6 @@ Class
 - Book
 - Comment
 - Sentence
+
+
+**같은 이름/작가 소설이 있으면 도서 등록 새로 안되게.
