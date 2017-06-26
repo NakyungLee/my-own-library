@@ -22,7 +22,13 @@ class BooksController < ApplicationController
   end
 
   post '/books/new' do
-    book = Book.create(name:params[:name],author:params[:author],user_id:session[:user_id]) if !params[:name].empty? && !params[:author].empty?
+    if !params[:name].empty? && !params[:author].empty?
+      book = Book.create(name:params[:name],author:params[:author],user_id:session[:user_id])
+    else
+      flash[:message]="Please fill in the blanks below, especially title and author."
+      redirect to '/books/new'
+    end
+
     comment = Comment.create(comment:params[:comment],book_id:book.id)  if !params[:comment].empty?
     sentence = Sentence.create(sentence:params[:sentence],book_id:book.id)  if !params[:sentence].empty?
     redirect to '/books'
@@ -37,7 +43,28 @@ class BooksController < ApplicationController
     book = Book.find(params[:book_id])
     book.update(name:params[:name]) unless params[:name].empty?
     book.update(author:params[:author]) unless params[:author].empty?
-    binding.pry
     redirect to '/books'
+  end
+
+  delete '/books/:book_id/delete' do
+    @book=Book.find(params[:book_id])
+    if @book.user_id == session[:user_id]
+      flash[:message] = "#{@book.name} has been deleted."
+      @book.delete
+      redirect to '/books'
+    else
+      flash[:message] = "You can only delete books you've enrolled."
+      redirect to '/books'
+    end
+  end
+
+  get '/books/delete-all' do
+    Book.all.each{|book| book.delete if book.user_id==session[:user_id]}
+    flash[:message] = "Your library has been initialized."
+    redirect to '/books'
+  end
+
+  get '/books/others' do
+    erb :'/books/others_books'
   end
 end

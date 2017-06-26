@@ -12,11 +12,10 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     if logged_in?
-      @username = 'user'
+      redirect to '/books'
     else
-      @username = 'Stranger'
+      redirect to '/books/others'
     end
-    erb :index
   end
 
   helpers do

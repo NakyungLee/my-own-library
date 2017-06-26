@@ -1,0 +1,24 @@
+
+<h1>Look around other users' books!</h1>
+<% if !logged_in? %>
+  <h2> Hello, stranger! Please <a href="/signup">sign up</a> or <a href="/login">login</a> to make your own library!</h2>
+<% end %>
+<div class="row" >
+  <% Book.all.each do |book| %>
+
+      <div class="col-md-4" style="margin:10px; padding:10px; padding-top:20px; background-color: 	#D3D3D3">
+        <% User.find(book.user_id).username %>
+        <p>Posetd by: <%= User.find(book.user_id).username %></p>
+        <p>Title: <%= book.name %></p>
+        <p>Author: <%= book.author %></p>
+        <form action="/books/<%= book.id %>/delete" method="post">
+          <input id="hidden" type="hidden" name="_method" value="delete">
+          <button sty type="button" class="btn btn-info" onclick="location.href='/books/<%=book.id%>/edit'">More Info</button>
+          <% if book.user_id==session[:user_id] %>
+            <button type="submit" class="btn btn-warning" value="Delete Tweet">Delete</button>
+          <% end %>
+        </form>
+
+      </div>
+  <% end %>
+</div>

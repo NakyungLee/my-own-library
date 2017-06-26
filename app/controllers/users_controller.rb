@@ -14,10 +14,18 @@ class UsersController < ApplicationController
       flash[:message] = "Fill in every field."
       redirect to '/signup'
     else
-      @user = User.new(username:params[:username],email:params[:email],password:params[:password])
-      @user.save
-      session[:user_id] = @user.id
-      redirect to '/books'
+      if User.find_by(username:params[:username],email:params[:email])
+        flash[:message] = "Hello, #{params[:username]}. You've already signed up. Please Login."
+        redirect to '/login'
+      elsif User.find_by(username:params[:username])
+        flash[:message] = "This username has already been picked. Please choose other username."
+        redirect to '/signup'
+      else
+        @user = User.new(username:params[:username],email:params[:email],password:params[:password])
+        @user.save
+        session[:user_id] = @user.id
+        redirect to '/books'
+      end
     end
   end
 
