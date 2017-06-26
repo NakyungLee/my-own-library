@@ -47,9 +47,9 @@
 			    </button>
 			    <a class="navbar-brand" href="/">
 						<% if logged_in? %>
-						  My Own Library: <%=User.find(session[:user_id]).username%>
+						   <%=User.find(session[:user_id]).username%>'s Own Library
 						<% else %>
-							  My Own Library: Not Logged in
+							  My Own Library
 						<% end %>
 
 
@@ -65,11 +65,13 @@
 
 <b class="caret"></b></a>
 			        <ul class="dropdown-menu">
-			            <li><a href="/login">Login</a></li>
-			            <li class="divider"></li>
-			            <li><a href="/logout">Logout</a></li>
-                  <li class="divider"></li>
-			            <li><a href="/signup">Signup</a></li>
+								<% if logged_in? %>
+									<li><a href="/logout">Logout</a></li>
+								<% else %>
+								<li><a href="/login">Login</a></li>
+								<li class="divider"></li>
+								<li><a href="/signup">Signup</a></li>
+								<% end %>
 			        </ul>
 			      </li>
 
