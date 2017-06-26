@@ -13,15 +13,20 @@
   <form  action="/books/<%=@book.id%>/edit" method="post">
      <input id="hidden" type="hidden" name="_method" value="patch">
     <label for="name">name: </label>
-    <input type="text" name="name" placeholder="name(title)" id="name"><br><br>
+    <input type="text" name="name" placeholder="name(title)" id="name">
+    <br><br>
     <label for="author">author: </label>
-    <input type="text" name="author" placeholder="author" id="author"><br><br>
+    <input type="text" name="author" placeholder="author" id="author">
+    <br><br>
     <label for="comment">comment: </label>
-    <input type="text" name="comment" placeholder="comment" id="comment"><br><br>
+    <input type="text" name="comment" placeholder="comment" id="comment">
+    <br><br>
     <label for="sentence">sentence: </label>
-    <input type="text" name="sentence" placeholder="sentence" id="sentence"><br><br>
+    <input type="text" name="sentence" placeholder="sentence" id="sentence">
+    <br><br>
     <p>..or add new comments</p>
-    <p><input type="text" name="comment2" size="50" placeholder="new comment"></p><br>
+    <p><input type="text" name="comment2" size="50" placeholder="new comment">
+    </p><br>
     <p>..or add new sentences</p>
     <p><input type="text" name="sentence2" size="50" placeholder="new sentence"></p><br>
       <button type="submit" class="btn btn-success" value="Edit ">Edit</button>
