@@ -9,7 +9,6 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-
   get '/' do
     if logged_in?
       redirect to '/books'

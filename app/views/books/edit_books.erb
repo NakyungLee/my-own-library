@@ -1,13 +1,26 @@
 <h1>Book Info</h1>
-<p>name:<%=@book.name%></p>
-<p>author:<%=@book.author%></p>
-<% @book.comments.each do |c| %>
-  <p>comment:<%= c.comment%></p>
-<% end %>
-<% @book.sentences.each do |s| %>
-  <p>sentence:<%= s.sentence%></p>
-<% end %>
+<ul>
+  <li><p>name: <%=@book.name%></p></li>
+  <li><p>author: <%=@book.author%></p></li>
+  <li>
+  <p>comment</p>
+    <ol>
+      <% @book.comments.each do |c| %>
+          <li><%=c.comment%></li>
+      <% end %>
+    </ol>
+  </li>
+  <li>
+    <p>sentence</p>
+    <ol>
+      <% @book.sentences.each do |s| %>
+        <li><%= s.sentence%></li>
+      <% end %>
+    </ol>
+    </li
+</ul>
 
+<br><br>
 <% if @book.user_id==session[:user_id] %>
   <h2>Edit..</h2>
   <form  action="/books/<%=@book.id%>/edit" method="post">

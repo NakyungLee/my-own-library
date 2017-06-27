@@ -1,21 +1,21 @@
 When we read a book, we often find the sentences we want to remember.
 Or sometimes, we want to add some comments.
 
-- Users can signup/login/logout ( )
-- Users can add books ( )
-- Users can add/edit/delete comments to a book page ( )
-- Users can add/edit/delete sentences to a book page ( )
+- Users can signup/login/logout (0 )
+- Users can add books ( 0)
+- Users can add/edit/delete comments to a book page ( 0)
+- Users can add/edit/delete sentences to a book page (0 )
 
 
 DB
-- Users have username, email, password ( )
-- Users can have many books ( )
+- Users have username, email, password ( 0)
+- Users can have many books (0 )
 
-- Books can have many comments and sentences ( )
-- Books have user_id ( )
+- Books can have many comments and sentences (0 )
+- Books have user_id (0 )
 
-- Logged in user can watch her all comments and sentences ( ) (Comment.all, Sentence.all)
-- Comment and Sentence belong to Books.
+- Logged in user can watch her all comments and sentences ( 0) (Comment.all, Sentence.all)
+- Comment and Sentence belong to Books.0
 
 
 Class
@@ -25,4 +25,6 @@ Class
 - Sentence
 
 
-**같은 이름/작가 소설이 있으면 도서 등록 새로 안되게.
+**같은 이름/작가 소설이 있으면 도서 등록 새로 안되게.0
+
+more work on : edit page에 라인마다 버튼 달기.

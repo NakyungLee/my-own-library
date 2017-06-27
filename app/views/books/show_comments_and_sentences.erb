@@ -1,3 +1,12 @@
-<% Comment.all.each do |comment| %>
-  <p><%=comment.comment%></p>
-<% end %>
+<h2>Comments</h2>
+  <ol>
+  <% Comment.all.each do |comment| %>
+    <li><%=comment.comment%>, from <%=Book.find(comment.book_id).name%></li>
+    <% end %>
+  </ol>
+
+  <h2>Sentences</h2>
+  <ol>
+  <% Sentence.all.each do |sentence| %>
+    <li><%=sentence.sentence%>, from <%=Book.find(sentence.book_id).name%></li>
+  <% end %>

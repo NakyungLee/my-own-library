@@ -20,13 +20,13 @@ ActiveRecord::Schema.define(version: 20170624142944) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "comment"
-    t.string "book_id"
+    t.string  "comment"
+    t.integer "book_id"
   end
 
   create_table "sentences", force: :cascade do |t|
-    t.string "sentence"
-    t.string "book_id"
+    t.string  "sentence"
+    t.integer "book_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -50,22 +50,16 @@ class BooksController < ApplicationController
 
     Comment.create(comment:params[:comment2],book_id:book.id) unless params[:comment2].empty?
     Sentence.create(sentence:params[:sentence2],book_id:book.id) unless params[:sentence2].empty?
-    binding.pry
     redirect to '/books'
   end
 
   delete '/books/:book_id/delete' do
     @book=Book.find(params[:book_id])
-    @comments = Comment.all.collect do |c|
-      c.book_id==@book.id
-      c
-    end
     if @book.user_id == session[:user_id]
       flash[:message] = "#{@book.name} has been deleted."
+      Comment.all.each { |c| c.delete if c.book_id == @book.id}
+      Sentence.all.each { |s| s.delete if s.book_id == @book.id}
       @book.delete
-      @comments.each do |c|
-        c.delete
-      end
       redirect to '/books'
     else
       flash[:message] = "You can only delete books you've enrolled."
@@ -74,19 +68,20 @@ class BooksController < ApplicationController
   end
 
   get '/books/delete-all' do
-    if book.user_id==session[:user_id]
-      Book.all.each{|b| b.delete}
-      Comment.all.each{|c| c.delete}
-      Sentence.all.each{|s| s.delete}
-    flash[:message] = "Your library has been initialized."
-    redirect to '/books'
+    if !Book.all.empty?
+      Comment.all.each{|c| c.delete if Book.find(c.book_id).user_id == session[:user_id]}
+      Sentence.all.each{|s| s.delete if Book.find(s.book_id).user_id == session[:user_id]}
+      Book.all.each{|b| b.delete if b.user_id == session[:user_id]}
+    end
+      flash[:message] = "Your library has been initialized."
+      redirect to '/books'
   end
 
   get '/books/others' do
     erb :'/books/others_books'
   end
+
   get '/books/quotes' do
-    binding.pry
     erb :'/books/show_comments_and_sentences'
   end
 end
