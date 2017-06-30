@@ -4,8 +4,6 @@ class BooksController < ApplicationController
 
   get '/books' do
     if logged_in?
-      @user = User.find(session[:user_id])
-      @books = Book.all
       erb :'/books/books'
     else
       flash[:message]="Please Login to access books page."
@@ -31,7 +29,7 @@ class BooksController < ApplicationController
 
     comment = Comment.create(comment:params[:comment],book_id:book.id)  if !params[:comment].empty?
     sentence = Sentence.create(sentence:params[:sentence],book_id:book.id)  if !params[:sentence].empty?
-    redirect to '/books'
+    redirect to "/books/#{book.id}/edit"
   end
 
   get '/books/:book_id/edit' do
@@ -69,15 +67,14 @@ class BooksController < ApplicationController
 
   get '/books/delete-all' do
     if !Book.all.empty?
-      Comment.all.each{|c| c.delete if Book.find(c.book_id).user_id == session[:user_id]}
-      Sentence.all.each{|s| s.delete if Book.find(s.book_id).user_id == session[:user_id]}
-      Book.all.each{|b| b.delete if b.user_id == session[:user_id]}
+      current_user.books.destroy_all
     end
-      flash[:message] = "Your library has been initialized."
-      redirect to '/books'
+    flash[:message] = "Your library has been initialized."
+    redirect to '/books'
   end
 
   get '/books/others' do
+    @books = Book.all
     erb :'/books/others_books'
   end
 

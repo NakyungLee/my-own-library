@@ -47,7 +47,7 @@
 			    </button>
 			    <a class="navbar-brand" href="/">
 						<% if logged_in? %>
-						   <%=User.find(session[:user_id]).username%>'s Own Library
+						   <%= current_user.username %>'s Own Library
 						<% else %>
 							  My Own Library
 						<% end %>
@@ -55,7 +55,7 @@
 			  </div>
 			  <div class="navbar-collapse collapse">
 			    <ul class="nav navbar-nav">
-			      <li><a href="/books">My Books</a></li>
+			      <li><a href="/books"><%= logged_in? ? "My Books" : "Create Book Collection"%></a></li>
 						<li><a href="/books/others">Others' Books</a></li>
 						<li><a href="/books/quotes">Quotes</a></li>
 			    </ul>

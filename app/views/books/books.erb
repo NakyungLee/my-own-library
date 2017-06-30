@@ -3,24 +3,22 @@
   <br><br>
 <% end %>
 
-<h2>Hello, <strong><%=@user.username%></strong>. This is your book page!</h2>
+<h2>Hello, <strong><%= current_user.username %></strong>. This is your book page!</h2>
 <br>
   <button type="button" class="btn btn-primary" onclick="location.href='/books/new'">Add Book</button>
   <button type="button" class="btn btn-danger" onclick="location.href='/books/delete-all'">Delete All</button>
 <br>
 <div class="row" >
-  <% @books.each do |book| %>
-    <% if book.user_id == session[:user_id] %>
-      <div class="col-md-4" style="margin:10px; padding:10px; padding-top:20px; background-color: 	#D3D3D3">
-        <p>Title: <%= book.name %></p>
-        <p>Author: <%= book.author %></p>
-        <form action="/books/<%= book.id %>/delete" method="post">
-          <input id="hidden" type="hidden" name="_method" value="delete">
-          <button sty type="button" class="btn btn-info" onclick="location.href='/books/<%=book.id%>/edit'">More Info</button>
-          <button type="submit" class="btn btn-warning" value="Delete Tweet">Delete</button>
-        </form>
+  <% current_user.books.each do |book| %>
+    <div class="col-md-4" style="margin:10px; padding:10px; padding-top:20px; background-color: 	#D3D3D3">
+      <p>Title: <%= book.name %></p>
+      <p>Author: <%= book.author %></p>
+      <form action="/books/<%= book.id %>/delete" method="post">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <button sty type="button" class="btn btn-info" onclick="location.href='/books/<%=book.id%>/edit'">More Info</button>
+        <button type="submit" class="btn btn-warning" value="Delete Tweet">Delete</button>
+      </form>
 
       </div>
-    <% end %>
   <% end %>
 </div>
